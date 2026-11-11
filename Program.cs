@@ -24,11 +24,19 @@ namespace SolidRefactoringLab
         static void Main(string[] args)
         {
             // 1. Choose the formatter (OCP)
-            IReportFormatter formatter = new PdfFormatter();
+            IReportFormatter pdf = new PdfFormatter();
+            IReportFormatter word = new WordFormatter();
+            IReportFormatter text = new PlainTextFormatter();
 
             // 2. Pass it to the manager
-            ReportManager manager = new ReportManager(formatter);
-            manager.GenerateReport();
+            ReportManager pdfManager = new ReportManager(pdf);
+            pdfManager.GenerateReport();
+
+            ReportManager wordManager = new ReportManager(word);
+            wordManager.GenerateReport();
+
+            ReportManager textManager = new ReportManager(text);
+            textManager.GenerateReport();
 
             // 3. Use the dedicated saver (SRP)
             ReportSaver saver = new ReportSaver();
